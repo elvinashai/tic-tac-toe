@@ -1,10 +1,28 @@
-#include <catch2/catch_test_macros.hpp>
-#include <catch2/benchmark/catch_benchmark.hpp>
-#include <catch2/benchmark/catch_constructor.hpp>
-#include <catch2/generators/catch_generators_range.hpp>
-
 #include "../src/tictactoe.hpp"
+#include <catch2/catch.hpp>
 
-TEST_CASE( "it works" ) {
-    REQUIRE( true );
+TEST_CASE("Game starts with player X") {
+
+    TicTacToe game;
+
+    REQUIRE(game.getCurrentPlayer() == 'X');
+}
+
+TEST_CASE("Detect win condition") {
+
+    TicTacToe game;
+
+    // simulate moves
+    game.makeMove(1);
+    game.makeMove(2);
+    game.makeMove(3);
+
+    REQUIRE(game.checkWin() == true);
+}
+
+TEST_CASE("Invalid move rejected") {
+
+    TicTacToe game;
+
+    REQUIRE(game.isValidMove("10") == false);
 }
